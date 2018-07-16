@@ -15,6 +15,46 @@ def english_number(number)
   # writing out right now.
   # write and left...get it? :)
   left = number
+  write = left/1_000_000_000_000
+  left -= write * 1_000_000_000_000
+  if write > 0
+    trillion = english_number write
+    num_string = num_string + trillion + ' trillion'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+  write = left/1_000_000_000
+  left -= write * 1_000_000_000
+  if write > 0
+    billions = english_number write
+    num_string = num_string + billions + ' billion'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+  write = left/1_000_000
+  left -= write * 1_000_000
+  if write > 0
+    millions = english_number write
+    num_string = num_string + millions + ' million'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
+  write = left/1000
+  left -= write * 1000
+  if write > 0
+    thousands = english_number write
+    num_string = num_string + thousands + ' thousand'
+    if left > 0
+      num_string += ' '
+    end
+  end
+
   write = left / 100 # How many hundreds left?
   left -= write * 100 # Subtract off those hundreds.
   if write > 0
@@ -26,6 +66,7 @@ def english_number(number)
       num_string += ' '
     end
   end
+
   write = left / 10 # How many tens left?
   left -= write * 10 # Subtract off those tens.
   if write > 0
@@ -49,6 +90,7 @@ def english_number(number)
       num_string += '-'
     end
   end
+
   write = left # How many ones left to write out?
   left = 0 # Subtract off those ones.
   if write > 0
@@ -60,17 +102,9 @@ def english_number(number)
   num_string
 end
 
-puts english_number(0)
-puts english_number(9)
-puts english_number(10)
-puts english_number(11)
-puts english_number(17)
-puts english_number(32)
-puts english_number(88)
-puts english_number(99)
-puts english_number(100)
-puts english_number(101)
-puts english_number(234)
-puts english_number(3211)
-puts english_number(999_999)
-puts english_number(1_000_000_000_000)
+loop do
+  puts 'Input number'
+  input_number = gets.chomp
+  break if input_number == ''
+  puts english_number(input_number.to_i)
+end

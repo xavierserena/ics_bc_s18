@@ -19,5 +19,5 @@ while input != '' && phrase < 6
 end
 birthday = Time.local(birthday[0], birthday[1], birthday[2], birthday[3],
                     birthday[4], birthday[5])
-puts 'You turned or will be one billion seconds old on:'
+puts 'You turned or will be 1 billion seconds old on:'
 puts birthday + 10**9

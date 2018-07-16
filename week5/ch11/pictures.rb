@@ -3,7 +3,7 @@
 ###
 ### An example for mac could be '/Users/username/Desktop/pic_dst'
 ### An example for PC could be 'C:/Users/username/Desktop/pic_dst'
-Dir.chdir '<destination>'
+Dir.chdir 'D:/Media/Testing'
 
 # First we find all of the pictures to be moved.
 ### In the next line you want the source
@@ -12,7 +12,7 @@ Dir.chdir '<destination>'
 ###
 ### An example for mac could be '/Users/username/Desktop/pic_src/**/*.{JPG,jpg}'
 ### An example for PC could be 'C:/Users/username/Desktop/pic_src/**/*.{JPG,jpg}'
-pic_names = Dir['<source>']
+pic_names = Dir['C:/Users/Xavier Aisek/Pictures/Testing/**/*.jpg']
 
 puts 'What would you like to call this batch?'
 batch_name = gets.chomp
@@ -24,13 +24,30 @@ pic_number = 1
 pic_names.each do |name|
   print '.' # This is our "progress bar".
   new_name = if pic_number < 10
-    "#{batch_name}0#{pic_number}.jpg"
+    "#{batch_name}0#{pic_number}"
   else
-    "#{batch_name}#{pic_number}.jpg"
+    "#{batch_name}#{pic_number}"
   end
 
+  if File.exists?(new_name+'.jpg')
+    puts ''
+    puts 'Error: File name already exists'
+    puts "Please type an option: 'Skip', 'Replace', or 'Keep Both'"
+    option = gets.chomp
+    if option.downcase == 'skip'
+      next
+    elsif option.downcase == 'replace'
+      File.delete(new_name)
+    elsif option.downcase == 'keep both'
+      File.rename(name, (new_name+'-Copy.jpg'))
+      pic_number += 1
+      next
+    end
+  end
+  #Add file extension
+  new_name += '.jpg'
   # Now where were we? Oh, yeah...
-  File.rename name, new_name
+  File.rename(name, new_name)
   # Finally, we increment the counter.
   pic_number += 1
 end
