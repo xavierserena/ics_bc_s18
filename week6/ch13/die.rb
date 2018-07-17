@@ -11,5 +11,14 @@ class Die
     @number_showing
   end
 
-  # Define a cheat method here
+  def cheat
+    puts 'What number do you want? (1-6)'
+    @number_showing = gets.chomp.to_i
+    if @number_showing > 0 && @number_showing < 7
+      showing
+    else
+      'Obviously it has to be between 1 and 6!'
+    end
+  end
 end
+puts Die.new.cheat
