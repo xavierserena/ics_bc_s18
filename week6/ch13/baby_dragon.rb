@@ -102,4 +102,31 @@ class Dragon
   end
 end
 
-# Make it interactive!
+help = ['You can interact with your pet by typing one of the following comands',
+        'Commands: feed, walk, put to bed, rock, toss',
+        'Type exit to exit the game or help to show the commands again']
+
+puts 'Welcome to the game Baby Dragon, an interactive experience!'
+puts 'How do you want to name your dragon?'
+pet_dragon = Dragon.new gets.chomp
+puts help
+while true
+  puts
+  input = gets.chomp.downcase
+  if input == 'feed'
+    pet_dragon.feed
+  elsif input == 'walk'
+    pet_dragon.walk
+  elsif input == 'put to bed'
+    pet_dragon.put_to_bed
+  elsif input == 'rock'
+    pet_dragon.rock
+  elsif input == 'toss'
+    pet_dragon.toss
+  elsif input == 'exit'
+    exit
+  else
+    puts 'Invalid command'
+    puts help
+  end
+end
