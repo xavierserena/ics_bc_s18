@@ -1,6 +1,11 @@
 def profile block_description, &block
-  start_time = Time.new
+  profiling = true
+  if profiling
+    start_time = Time.new
+  end
   block.call
-  duration = Time.new - start_time
-  puts "#{block_description}: #{duration} seconds"
+  if profiling
+    duration = Time.new - start_time
+    puts "#{block_description}: #{duration} seconds"
+  end
 end
